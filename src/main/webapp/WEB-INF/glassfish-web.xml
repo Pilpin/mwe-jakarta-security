@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<glassfish-web-app>
+    <parameter-encoding default-charset="UTF-8"/>
+    <security-role-mapping>
+        <role-name>ADMIN</role-name>
+        <group-name>ADMIN</group-name>
+    </security-role-mapping>
+
+    <security-role-mapping>
+        <role-name>USER</role-name>
+        <group-name>USER</group-name>
+        <group-name>ADMIN</group-name>
+    </security-role-mapping>
+</glassfish-web-app>

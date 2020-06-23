@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Main page</title>
+    </h:head>
+    <h:body>
+        <c:if test="#{empty request.userPrincipal}">
+            <h:form>You are not logged in, <h:link outcome="/login.xhtml">login</h:link>.</h:form>
+        </c:if>
+        <c:if test="#{not empty request.userPrincipal}">
+            <h3>Welcome! #{request.userPrincipal.name}</h3>
+            You are at the index.
+            <h:form>
+                <h:commandLink action="#{logout.submit}">logout</h:commandLink>
+            </h:form>
+        </c:if>
+    </h:body>
+</html>
