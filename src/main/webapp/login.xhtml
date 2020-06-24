@@ -1,29 +1,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
     <h:head>
         <title>Login page</title>
     </h:head>
     <h:body>
         <c:if test="#{empty request.userPrincipal}">
-            <h:form id="login">
+            <o:form id="login" useRequestURI="false">
                 <fieldset>
                     <h:inputHidden id="forwardURL" value="#{login.forwardURL}" />
-                    <h:outputLabel for="username" value="Username" />
-                    <h:inputText id="username" required="true" value="#{login.username}" />
-                    <h:message for="username" styleClass="message" />
+                    <p:outputLabel for="username" value="Username" />
+                    <p:inputText id="username" required="true" value="#{login.username}" />
+                    <p:message for="username" styleClass="message" />
 
-                    <h:outputLabel for="password" value="Password" />
-                    <h:inputSecret id="password" required="true" value="#{login.password}" />
-                    <h:message for="password" styleClass="message" />
+                    <p:outputLabel for="password" value="Password" />
+                    <p:password id="password" required="true" value="#{login.password}" />
+                    <p:message for="password" styleClass="message" />
 
                     <footer>
-                        <h:commandButton id="submit" action="#{login.submit}" value="Submit" />
-                        <h:message for="login" styleClass="message" />
+                        <p:commandButton id="submit" action="#{login.submit}" value="Submit" ajax="false" />
+                        <p:message for="login" styleClass="message" />
                     </footer>
                 </fieldset>
-            </h:form>
+            </o:form>
         </c:if>
         <c:if test="#{not empty request.userPrincipal}">
             <h3>Welcome!</h3>
