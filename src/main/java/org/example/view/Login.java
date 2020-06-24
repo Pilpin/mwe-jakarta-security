@@ -33,18 +33,18 @@ public class Login {
     @Inject private FacesContext facesContext;
     @Inject private ExternalContext externalContext;
 
-    private String url;
+    private String forwardURL;
 
     @NotNull private String username;
     @NotNull private String password;
 
     @PostConstruct
     private void postConstruct() {
-        if (url != null) return;
+        if (forwardURL != null) return;
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         String requestURI = (String) request.getAttribute(RequestDispatcher.FORWARD_REQUEST_URI);
         String queryString = (String) request.getAttribute(RequestDispatcher.FORWARD_QUERY_STRING);
-        url = (queryString == null) ? requestURI : (requestURI + "?" + queryString);
+        forwardURL = (queryString == null) ? requestURI : (requestURI + "?" + queryString);
     }
 
     public String submit() {
@@ -78,7 +78,7 @@ public class Login {
             (HttpServletRequest) externalContext.getRequest(),
             (HttpServletResponse) externalContext.getResponse(),
             AuthenticationParameters.withParams()
-                    .newAuthentication(url == null)
+                    .newAuthentication(forwardURL == null)
                     .credential(new UsernamePasswordCredential(username, password))
         );
     }
@@ -87,8 +87,8 @@ public class Login {
         String user = securityContext.getCallerPrincipal().getName();
 
         try {
-            if (url != null) {
-                externalContext.redirect(url);
+            if (forwardURL != null) {
+                externalContext.redirect(forwardURL);
                 return;
             }
 
@@ -120,11 +120,11 @@ public class Login {
         this.password = password;
     }
 
-    public String getUrl() {
-        return url;
+    public String getForwardURL() {
+        return forwardURL;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setForwardURL(String forwardURL) {
+        this.forwardURL = forwardURL;
     }
 }

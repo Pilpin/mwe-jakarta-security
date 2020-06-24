@@ -9,7 +9,7 @@
         <c:if test="#{empty request.userPrincipal}">
             <h:form id="login">
                 <fieldset>
-                    <h:inputText id="url" value="#{login.url}" />
+                    <h:inputHidden id="forwardURL" value="#{login.forwardURL}" />
                     <h:outputLabel for="username" value="Username" />
                     <h:inputText id="username" required="true" value="#{login.username}" />
                     <h:message for="username" styleClass="message" />
